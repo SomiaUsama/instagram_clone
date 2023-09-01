@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <h1 class="title">User List</h1>
+            <ul class="user-list">
+                {% for user in users %}
+                    <li class="box">
+                        <strong>Name:</strong> {{ user.name }}<br>
+                        <strong>Email:</strong> {{ user.email }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

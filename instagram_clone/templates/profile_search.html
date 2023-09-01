@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Profile Search</h1>
+            <form method="GET" action="{% url 'profile_search' %}">
+                <div class="field">
+                    <label class="label">Search by Username:</label>
+                    <div class="control">
+                        <input class="input" type="text" name="search_query" placeholder="Enter a username">
+                    </div>
+                </div>
+                <button class="button is-primary" type="submit">Search</button>
+            </form>
+            <ul class="profile-list">
+                {% for profile in profiles %}
+                    <li class="box">
+                        <a href="{% url 'profile' profile.user.username %}"><strong>Username:</strong> {{ profile.user.username }}</a><br>
+                        <!-- Display other profile details as needed -->
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
