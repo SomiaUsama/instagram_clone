@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from authy.forms import SignupForm, ChangePasswordForm, EditProfileForm
+from authy.forms import SignupForm, EditProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 from .models import Profile
@@ -103,29 +103,6 @@ def Signup(request):
 
 	return render(request, 'signup.html', context)
 
-
-@login_required
-def PasswordChange(request):
-	user = request.user
-	if request.method == 'POST':
-		form = ChangePasswordForm(request.POST)
-		if form.is_valid():
-			new_password = form.cleaned_data.get('new_password')
-			user.set_password(new_password)
-			user.save()
-			update_session_auth_hash(request, user)
-			return redirect('change_password_done')
-	else:
-		form = ChangePasswordForm(instance=user)
-
-	context = {
-		'form':form,
-	}
-
-	return render(request, 'change_password.html', context)
-
-def PasswordChangeDone(request):
-	return render(request, 'change_password_done.html')
 
 
 @login_required
